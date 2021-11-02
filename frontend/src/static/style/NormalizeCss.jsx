@@ -48,6 +48,7 @@ const NormalizeCss = createGlobalStyle`
     }
     a {
         text-decoration: none;
+        color: inherit;
     }
 `;
 

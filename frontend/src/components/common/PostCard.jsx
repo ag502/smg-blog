@@ -29,6 +29,12 @@ const PostCardContainer = styled.li`
     flex-direction: column;
     padding: 10px;
     box-shadow: 5px 5px 11px 3px #e8e8e8;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.25s ease-in;
+    &:hover {
+        transform: translateY(-5px);
+    }
 `;
 
 const PostCardBody = styled.div`

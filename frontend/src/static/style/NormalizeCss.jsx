@@ -50,6 +50,13 @@ const NormalizeCss = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+    button {
+        background-color: inherit;
+        padding: 0;
+        margin: 0;
+        border: none;
+        cursor: pointer;
+    }
 `;
 
 export default NormalizeCss;

@@ -15,6 +15,11 @@ module.exports = function (env, args) {
                 '@': path.resolve(__dirname, './src'),
             },
         },
+        devServer: {
+            static: './dist',
+            port: 3000,
+            historyApiFallback: true,
+        },
         module: {
             rules: [
                 {

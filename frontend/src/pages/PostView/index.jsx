@@ -2,8 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
+import { PostHeader, PostBody } from '@/components/postView';
+
+const post = {
+    id: 1,
+    author: 'user1',
+    time: '2021-10-27',
+    title: 'This is Competition',
+    content: '<h1>Test</h1>',
+};
+
 function PostView() {
-    return <PostViewContainer>//</PostViewContainer>;
+    return (
+        <PostViewContainer>
+            <PostHeader title={post.title} info={{ time: post.time, author: post.author }} />
+            <PostBody content={post.content} />
+        </PostViewContainer>
+    );
 }
 
 const PostViewContainer = styled.div`

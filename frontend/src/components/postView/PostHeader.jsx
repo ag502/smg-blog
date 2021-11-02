@@ -21,7 +21,7 @@ function PostHeader({ title, info }) {
 }
 
 const PostHeaderContainer = styled.div`
-    margin-bottom: 20px;
+    margin-bottom: 80px;
 `;
 
 const PostTitle = styled.h1`

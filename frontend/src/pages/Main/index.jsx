@@ -27,7 +27,7 @@ function Main() {
         <MainPageContainer>
             <PostContainer>
                 {posts.map(({ id, ...rest }) => (
-                    <PostCard key={id} postInfo={rest} />
+                    <PostCard key={id} postInfo={{ id, ...rest }} />
                 ))}
             </PostContainer>
         </MainPageContainer>

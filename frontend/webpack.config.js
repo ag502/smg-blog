@@ -12,14 +12,16 @@ module.exports = function (env, args) {
         resolve: {
             extensions: ['.js', '.jsx'],
             alias: {
-                '@': path.resolve(__dirname, './src'),
+                '@': path.resolve(__dirname, 'src'),
             },
         },
-        devServer: {
-            static: './dist',
-            port: 3000,
-            historyApiFallback: true,
-        },
+        devServer: env.production
+            ? {}
+            : {
+                  static: './dist',
+                  port: 3000,
+                  historyApiFallback: true,
+              },
         module: {
             rules: [
                 {

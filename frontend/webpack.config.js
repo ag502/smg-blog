@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = function (env, args) {
     return {
         mode: env.production ? 'production' : 'development',
-        entry: './src/index.js',
+        entry: './src/index.jsx',
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: 'index.js',
@@ -12,9 +12,16 @@ module.exports = function (env, args) {
         resolve: {
             extensions: ['.js', '.jsx'],
             alias: {
-                '@': path.resolve(__dirname, './src'),
+                '@': path.resolve(__dirname, 'src'),
             },
         },
+        devServer: env.production
+            ? {}
+            : {
+                  static: './dist',
+                  port: 3000,
+                  historyApiFallback: true,
+              },
         module: {
             rules: [
                 {

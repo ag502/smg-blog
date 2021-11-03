@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { PostHeader, PostBody } from '@/components/postView';
+import { PostHeader, PostBody, PostComment } from '@/components/postView';
 
 const post = {
     id: 1,
@@ -17,6 +17,7 @@ function PostView() {
         <PostViewContainer>
             <PostHeader title={post.title} info={{ time: post.time, author: post.author }} />
             <PostBody content={post.content} />
+            <PostComment />
         </PostViewContainer>
     );
 }

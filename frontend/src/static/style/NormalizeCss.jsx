@@ -55,6 +55,12 @@ const NormalizeCss = createGlobalStyle`
         border: none;
         cursor: pointer;
     }
+    textarea {
+        outline: none;
+        resize: none;
+        overflow: hidden;
+        border: none;
+    }
 `;
 
 export default NormalizeCss;

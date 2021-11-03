@@ -61,6 +61,10 @@ const NormalizeCss = createGlobalStyle`
         overflow: hidden;
         border: none;
     }
+    input {
+        outline: none;
+        border: none;
+    }
 `;
 
 export default NormalizeCss;

@@ -40,6 +40,10 @@ module.exports = function (env, args) {
                         },
                     ],
                 },
+                {
+                    test: /.css$/,
+                    use: ['style-loader', 'css-loader'],
+                },
             ],
         },
         plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],

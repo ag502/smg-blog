@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { multiLineEllipsis } from '@/static/style/commonCss';
 
 function PostCard({ postInfo }) {
-    const { id, title, overView, thumbnail, author, time } = postInfo;
+    const { id, title, overview, thumbnail, userName, time } = postInfo;
     const { push } = useHistory();
 
     const handleViewPost = () => {
@@ -16,7 +16,7 @@ function PostCard({ postInfo }) {
         <PostCardContainer onClick={handleViewPost}>
             <PostCardBody>
                 <PostTitle>{title}</PostTitle>
-                <PostOverView>{overView}</PostOverView>
+                <PostOverView>{overview}</PostOverView>
                 {thumbnail && (
                     <PostThumbnail>
                         <img src={thumbnail} alt='' />
@@ -24,7 +24,7 @@ function PostCard({ postInfo }) {
                 )}
             </PostCardBody>
             <PostInfo>
-                <span>{author}</span>
+                <span>{userName}</span>
                 <span>{time}</span>
             </PostInfo>
         </PostCardContainer>

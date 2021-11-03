@@ -1,14 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 import { commentStyle } from '@/static/style/commonCss';
 
-function FirstLevelComment({ content }) {
-    return <FirstLevelCommentContainer>{content}</FirstLevelCommentContainer>;
-}
-
-function SecondLevelComment({ content }) {
-    return <SecondLevelCommentContainer>┕ {content}</SecondLevelCommentContainer>;
+function Comment({ content, level }) {
+    return (
+        <FirstLevelCommentContainer level={level}>
+            <div>{content}</div>
+            <CommentController>
+                <AuthorInfo>
+                    <span>user1</span>
+                    <span>2021-10-27</span>
+                </AuthorInfo>
+            </CommentController>
+        </FirstLevelCommentContainer>
+    );
 }
 
 function PostComments({ comment }) {
@@ -16,11 +22,7 @@ function PostComments({ comment }) {
         <ul>
             {comment.map(({ id, content, level }) => (
                 <Fragment key={id}>
-                    {level === 1 ? (
-                        <FirstLevelComment content={content} />
-                    ) : (
-                        <SecondLevelComment content={content} />
-                    )}
+                    <Comment content={content} level={level} />
                 </Fragment>
             ))}
         </ul>
@@ -29,12 +31,23 @@ function PostComments({ comment }) {
 
 const FirstLevelCommentContainer = styled.li`
     ${commentStyle}
+    padding-left: ${(props) => props.level === 2 && '20px'}
 `;
 
-const SecondLevelCommentContainer = styled.li`
-    ${commentStyle}
-    padding-left: 30px;
-    background-color: #f8f8f8;
+const CommentController = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    margin-top: 15px;
+`;
+
+const AuthorInfo = styled.div`
+    & > span:first-of-type:after {
+        content: '·';
+        display: inline-block;
+        margin: 0 5px;
+    }
 `;
 
 export default PostComments;

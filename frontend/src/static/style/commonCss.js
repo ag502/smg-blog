@@ -11,6 +11,8 @@ const multiLineEllipsis = css`
 `;
 
 const commentStyle = css`
+    display: flex;
+    flex-direction: column;
     padding: 20px 10px;
     &:not(:last-of-type) {
         border-bottom: 1px solid #e9ecef;

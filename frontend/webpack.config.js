@@ -7,6 +7,7 @@ module.exports = function (env, args) {
         entry: './src/index.jsx',
         output: {
             path: path.resolve(__dirname, 'dist'),
+            publicPath: '/',
             filename: 'index.js',
         },
         resolve: {
@@ -18,7 +19,9 @@ module.exports = function (env, args) {
         devServer: env.production
             ? {}
             : {
-                  static: './dist',
+                  static: {
+                      directory: path.join(__dirname, 'dist'),
+                  },
                   port: 3000,
                   historyApiFallback: true,
               },

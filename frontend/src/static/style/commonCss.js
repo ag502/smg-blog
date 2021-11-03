@@ -10,4 +10,11 @@ const multiLineEllipsis = css`
     word-wrap: break-word;
 `;
 
-export { multiLineEllipsis };
+const commentStyle = css`
+    padding: 20px 10px;
+    &:not(:last-of-type) {
+        border-bottom: 1px solid #e9ecef;
+    }
+`;
+
+export { multiLineEllipsis, commentStyle };

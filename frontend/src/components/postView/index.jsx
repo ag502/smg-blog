@@ -1,3 +1,4 @@
 export { default as PostHeader } from './PostHeader';
 export { default as PostBody } from './PostBody';
-export { default as PostComment } from './PostComment';
+export { default as PostFooter } from './PostFooter';
+export { default as PostComments } from './PostComments';

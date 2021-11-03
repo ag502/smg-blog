@@ -17,4 +17,22 @@ const getEntirePosts = async () => {
     return result;
 };
 
-module.exports = { getEntirePosts };
+const getMyEntirePosts = async () => {
+    const result = await overview.findAll({
+        include: [{ model: user, attributes: [] }],
+        attributes: [
+            'id',
+            'userId',
+            [Sequelize.col('user.name'), 'userName'],
+            'title',
+            'overview',
+            'createdAt',
+        ],
+        where: {
+            userId: 1,
+        },
+    });
+    return result;
+};
+
+module.exports = { getEntirePosts, getMyEntirePosts };

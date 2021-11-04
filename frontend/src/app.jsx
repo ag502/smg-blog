@@ -9,9 +9,11 @@ import MyPost from './pages/MyPost';
 import PostView from './pages/PostView';
 import Write from './pages/Write';
 
+import { AuthContext } from './hooks/context';
+
 function App() {
     return (
-        <>
+        <AuthContext.Provider value='ag502'>
             <GlobalCss />
             <NormalizeCss />
             <Router>
@@ -23,7 +25,7 @@ function App() {
                     <Route exact path='/write' component={Write} />
                 </Switch>
             </Router>
-        </>
+        </AuthContext.Provider>
     );
 }
 

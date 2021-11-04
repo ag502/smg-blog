@@ -25,6 +25,7 @@ function Write() {
             });
             push('/mylist');
         } catch (error) {
+            console.log(error);
             alert('등록 실패');
         }
     };

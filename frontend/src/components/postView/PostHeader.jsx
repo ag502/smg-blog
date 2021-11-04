@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
+import { AuthContext } from '@/hooks/context';
+
 function PostHeader({ title, info }) {
+    const userInfo = useContext(AuthContext);
     const { author, time } = info;
     return (
         <PostHeaderContainer>
@@ -11,10 +14,12 @@ function PostHeader({ title, info }) {
                     <span>{author}</span>
                     <span>{time}</span>
                 </PostInfo>
-                <PostAction>
-                    <button type='button'>수정</button>
-                    <button type='button'>삭제</button>
-                </PostAction>
+                {userInfo === author && (
+                    <PostAction>
+                        <button type='button'>수정</button>
+                        <button type='button'>삭제</button>
+                    </PostAction>
+                )}
             </PostController>
         </PostHeaderContainer>
     );

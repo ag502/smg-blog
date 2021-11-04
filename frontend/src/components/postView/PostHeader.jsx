@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import { AuthContext } from '@/hooks/context';
 
@@ -11,6 +12,15 @@ function PostHeader({ title, info, postId }) {
 
     const handleClickModifyBtn = () => {
         push(`/write/${postId}`);
+    };
+
+    const handleClickDeleteBtn = async () => {
+        try {
+            await axios.post(`http://localhost:8000/delete/${postId}`);
+            push('/mylist');
+        } catch (error) {
+            alert('삭제실패');
+        }
     };
 
     return (
@@ -26,7 +36,9 @@ function PostHeader({ title, info, postId }) {
                         <button type='button' onClick={handleClickModifyBtn}>
                             수정
                         </button>
-                        <button type='button'>삭제</button>
+                        <button type='button' onClick={handleClickDeleteBtn}>
+                            삭제
+                        </button>
                     </PostAction>
                 )}
             </PostController>

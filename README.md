@@ -1,10 +1,11 @@
 ## SMG Blog
 
 ### 기술스택
-
+---
 <img src="https://img.shields.io/badge/-Javascript-F7DF1E?&logo=JavaScript&logoColor=white"> <img src="https://img.shields.io/badge/-Webpack-8DD6F9?&logo=WebPack&logoColor=white"> <img src="https://img.shields.io/badge/Babel-F9DC3E?&logo=Babel&logoColor=white"> <img src="https://img.shields.io/badge/-React-61DAFB?&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/-Node.js-339933?&logo=Node.js&logoColor=yellow"> <img src="https://img.shields.io/badge/-Express-white?&logo=express&logoColor=black"> <img src="https://img.shields.io/badge/-MYSQL-4479A1?&logo=MYSQL&logoColor=white">  <img src="https://img.shields.io/badge/-Sequelize-52B0E7?&logo=Sequelize&logoColor=white"> <img src="https://img.shields.io/badge/-ESLint-4B32C3?&logo=ESLint&logoColor=white"/>
 
 ### 데모
+---
 1. 게시물 목록
 ![1](https://user-images.githubusercontent.com/35404137/140377256-7a14463e-fb2b-4a79-b59f-e1538a7dc94a.gif)
 2. 게시물 조회
@@ -18,3 +19,6 @@
 6. 댓글 작성
 ![6](https://user-images.githubusercontent.com/35404137/140378830-ab5178f9-c898-4e40-aeb6-23beea7c4a05.gif)
 
+### DB
+---
+![Blog_20211105_020106](https://user-images.githubusercontent.com/35404137/140385030-ac8eaf73-e0ec-4ef5-a5f4-1902d80124e0.png)

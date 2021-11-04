@@ -12,11 +12,14 @@ function Write() {
     const editorRef = useRef(null);
 
     useEffect(() => {
+        const curEditor = editorRef.current.getInstance();
+        setTitle('');
+        curEditor.setHTML('');
         const getPost = async () => {
             try {
                 const result = await axios.get(`http://localhost:8000/post/${id}`);
                 setTitle(result.data?.title);
-                editorRef.current.getInstance().setHTML(result.data.content);
+                curEditor.setHTML(result.data.content);
             } catch (error) {
                 alert('조회실패');
             }
@@ -25,7 +28,7 @@ function Write() {
         if (id) {
             getPost();
         }
-    }, []);
+    }, [id]);
 
     const handleChangeTitle = (e) => {
         const { target } = e;

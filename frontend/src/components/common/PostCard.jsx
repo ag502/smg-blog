@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { multiLineEllipsis } from '@/static/style/commonCss';
+import { getDashdedDate } from '@/static/util/functions';
+import { getDashedDate } from '../../static/util/functions';
 
 function PostCard({ postInfo }) {
-    const { id, title, overview, thumbnail, userName, time } = postInfo;
+    const { id, title, overview, thumbnail, userName, createdAt } = postInfo;
     const { push } = useHistory();
 
     const handleViewPost = () => {
@@ -25,7 +27,7 @@ function PostCard({ postInfo }) {
             </PostCardBody>
             <PostInfo>
                 <span>{userName}</span>
-                <span>{time}</span>
+                <span>{getDashedDate(createdAt)}</span>
             </PostInfo>
         </PostCardContainer>
     );

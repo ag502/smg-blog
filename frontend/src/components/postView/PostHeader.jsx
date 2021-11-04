@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 import { AuthContext } from '@/hooks/context';
+import { getDashedDate } from '@/static/util/functions';
 
 function PostHeader({ title, info, postId }) {
     const userInfo = useContext(AuthContext);
@@ -29,7 +30,7 @@ function PostHeader({ title, info, postId }) {
             <PostController>
                 <PostInfo>
                     <span>{author}</span>
-                    <span>{time}</span>
+                    <span>{getDashedDate(time)}</span>
                 </PostInfo>
                 {userInfo === author && (
                     <PostAction>

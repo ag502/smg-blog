@@ -1,12 +1,16 @@
-import React from 'react';
-import DOMPurify from 'dompurify';
+import React, { useRef, useEffect } from 'react';
+import { Viewer } from '@toast-ui/react-editor';
+
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 function PostBody({ content }) {
-    const sanitizedContent = {
-        __html: DOMPurify.sanitize(content),
-    };
+    const viewRef = useRef(null);
 
-    return <div dangerouslySetInnerHTML={sanitizedContent} />;
+    useEffect(() => {
+        viewRef.current.getInstance().setMarkdown(content);
+    }, []);
+
+    return <Viewer ref={viewRef} />;
 }
 
 export default PostBody;

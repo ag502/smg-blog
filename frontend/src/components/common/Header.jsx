@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const HeaderLinks = [
     { path: '/', title: '전체글' },
     { path: '/mylist', title: '내가 쓴 글' },
+    { path: '/write', title: '글쓰기' },
 ];
 
 function Header() {
@@ -42,7 +43,7 @@ const StyledLink = styled(NavLink).attrs({
         textDecoration: 'underline',
     },
 })`
-    &:first-child {
+    &:not(:last-child) {
         margin-right: 10px;
     }
 `;

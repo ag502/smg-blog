@@ -7,6 +7,7 @@ module.exports = function (env, args) {
         entry: './src/index.jsx',
         output: {
             path: path.resolve(__dirname, 'dist'),
+            publicPath: '/',
             filename: 'index.js',
         },
         resolve: {
@@ -18,7 +19,9 @@ module.exports = function (env, args) {
         devServer: env.production
             ? {}
             : {
-                  static: './dist',
+                  static: {
+                      directory: path.join(__dirname, 'dist'),
+                  },
                   port: 3000,
                   historyApiFallback: true,
               },
@@ -32,10 +35,17 @@ module.exports = function (env, args) {
                             loader: 'babel-loader',
                             options: {
                                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                                plugins: ['babel-plugin-styled-components'],
+                                plugins: [
+                                    'babel-plugin-styled-components',
+                                    '@babel/plugin-transform-runtime',
+                                ],
                             },
                         },
                     ],
+                },
+                {
+                    test: /.css$/,
+                    use: ['style-loader', 'css-loader'],
                 },
             ],
         },

@@ -20,8 +20,6 @@ const NormalizeCss = createGlobalStyle`
         margin: 0;
         padding: 0;
         border: 0;
-        font-size: 100%;
-        font: inherit;
         vertical-align: baseline;
     }
     article, aside, details, figcaption, figure, 
@@ -49,6 +47,23 @@ const NormalizeCss = createGlobalStyle`
     a {
         text-decoration: none;
         color: inherit;
+    }
+    button {
+        background-color: inherit;
+        padding: 0;
+        margin: 0;
+        border: none;
+        cursor: pointer;
+    }
+    textarea {
+        outline: none;
+        resize: none;
+        overflow: hidden;
+        border: none;
+    }
+    input {
+        outline: none;
+        border: none;
     }
 `;
 

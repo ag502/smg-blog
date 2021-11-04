@@ -1,15 +1,24 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { multiLineEllipsis } from '@/static/style/commonCss';
+import { getDashdedDate } from '@/static/util/functions';
+import { getDashedDate } from '../../static/util/functions';
 
 function PostCard({ postInfo }) {
-    const { title, overView, thumbnail, author, time } = postInfo;
+    const { id, title, overview, thumbnail, userName, createdAt } = postInfo;
+    const { push } = useHistory();
+
+    const handleViewPost = () => {
+        push(`/post/${id}`);
+    };
+
     return (
-        <PostCardContainer>
+        <PostCardContainer onClick={handleViewPost}>
             <PostCardBody>
                 <PostTitle>{title}</PostTitle>
-                <PostOverView>{overView}</PostOverView>
+                <PostOverView>{overview}</PostOverView>
                 {thumbnail && (
                     <PostThumbnail>
                         <img src={thumbnail} alt='' />
@@ -17,8 +26,8 @@ function PostCard({ postInfo }) {
                 )}
             </PostCardBody>
             <PostInfo>
-                <span>{author}</span>
-                <span>{time}</span>
+                <span>{userName}</span>
+                <span>{getDashedDate(createdAt)}</span>
             </PostInfo>
         </PostCardContainer>
     );
@@ -29,6 +38,13 @@ const PostCardContainer = styled.li`
     flex-direction: column;
     padding: 10px;
     box-shadow: 5px 5px 11px 3px #e8e8e8;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.25s ease-in;
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-5px);
+    }
 `;
 
 const PostCardBody = styled.div`

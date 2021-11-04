@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -9,15 +9,16 @@ function PostView() {
     const [post, setPost] = useState({});
     const { id } = useParams();
 
+    const getPost = useCallback(async () => {
+        try {
+            const result = await axios.get(`http://localhost:8000/post/${id}`);
+            setPost(result.data);
+        } catch (error) {
+            alert('조회실패');
+        }
+    }, []);
+
     useEffect(() => {
-        const getPost = async () => {
-            try {
-                const result = await axios.get(`http://localhost:8000/post/${id}`);
-                setPost(result.data);
-            } catch (error) {
-                alert('조회실패');
-            }
-        };
         getPost();
     }, []);
 
@@ -31,7 +32,7 @@ function PostView() {
                         postId={id}
                     />
                     <PostBody content={post.content} />
-                    <PostFooter comments={post.comments} />
+                    <PostFooter postId={id} getPost={getPost} comments={post.comments} />
                 </>
             )}
         </PostViewContainer>

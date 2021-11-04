@@ -1,37 +1,41 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import styled from 'styled-components';
 
 import { commentStyle } from '@/static/style/commonCss';
+import { AuthContext } from '@/hooks/context';
+import { getDashedDate } from '@/static/util/functions';
 
-function Comment({ content, level }) {
+function Comment({ content, level, createdAt }) {
+    const userInfo = useContext(AuthContext);
     return (
-        <FirstLevelCommentContainer level={level}>
+        <CommentContainer level={level}>
             <div>{content}</div>
             <CommentController>
                 <AuthorInfo>
-                    <span>user1</span>
-                    <span>2021-10-27</span>
+                    <span>{userInfo}</span>
+                    <span>{getDashedDate(createdAt)}</span>
                 </AuthorInfo>
             </CommentController>
-        </FirstLevelCommentContainer>
+        </CommentContainer>
     );
 }
 
 function PostComments({ comment }) {
     return (
         <ul>
-            {comment.map(({ id, content, level }) => (
+            {comment.map(({ id, content, level, createdAt }) => (
                 <Fragment key={id}>
-                    <Comment content={content} level={level} />
+                    <Comment content={content} level={level} createdAt={createdAt} />
                 </Fragment>
             ))}
         </ul>
     );
 }
 
-const FirstLevelCommentContainer = styled.li`
+const CommentContainer = styled.li`
     ${commentStyle}
-    padding-left: ${(props) => props.level === 2 && '20px'}
+    padding-left: ${(props) => props.level === 2 && '35px'};
+    background-color: ${(props) => (props.level === 2 ? '#FAFAFA' : 'inherit')};
 `;
 
 const CommentController = styled.div`

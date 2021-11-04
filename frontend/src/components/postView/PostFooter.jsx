@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import PostComments from './PostComments';
 
-function PostFooter({ comments }) {
+function PostFooter({ postId, comments, getPost }) {
     const [curActiveTextArea, setActiveTextArea] = useState(-1);
+    const [commentInput, setComment] = useState('');
+    const [replyInput, setReply] = useState('');
 
     const handleClickReplyBtn = (idx) => () => {
+        setReply('');
         if (idx === curActiveTextArea) {
             setActiveTextArea(-1);
         } else {
@@ -14,11 +18,62 @@ function PostFooter({ comments }) {
         }
     };
 
+    const handleChangeComment = (e) => {
+        const { target } = e;
+        if (target.id === 'comment') {
+            setComment(target.value);
+        } else {
+            setReply(target.value);
+        }
+    };
+
+    const handleSubmitMainComment = async () => {
+        if (commentInput === '') {
+            alert('댓글을 입력해 주세요.');
+            return;
+        }
+
+        try {
+            await axios.post(`http://localhost:8000/addcomment/${postId}`, {
+                content: commentInput,
+            });
+            await getPost();
+            setComment('');
+        } catch (error) {
+            alert('등록실패');
+        }
+    };
+
+    const handleSubmitReply = (commentId) => async () => {
+        if (replyInput === '') {
+            alert('답글을 입력해 주세요.');
+            return;
+        }
+
+        try {
+            await axios.post(`http://localhost:8000/addReply/${postId}`, {
+                parentId: commentId,
+                content: replyInput,
+            });
+            await getPost();
+            setReply('');
+        } catch (error) {
+            alert('등록실패');
+        }
+    };
+
     return (
         <PostCommentContainer>
             <CommentEnroll>
-                <CommentInput placeholder='댓글을 입력해 주세요.' />
-                <CommentEnrollButton type='button'>댓글 등록</CommentEnrollButton>
+                <CommentInput
+                    id='comment'
+                    placeholder='댓글을 입력해 주세요.'
+                    value={commentInput}
+                    onChange={handleChangeComment}
+                />
+                <CommentEnrollButton type='button' onClick={handleSubmitMainComment}>
+                    댓글 등록
+                </CommentEnrollButton>
             </CommentEnroll>
             {comments.map((comment, idx) => (
                 <CommentListContainer key={idx}>
@@ -28,8 +83,18 @@ function PostFooter({ comments }) {
                     </ReplyButton>
                     {curActiveTextArea === idx && (
                         <>
-                            <CommentInput placeholder='댓글을 입력해 주세요.' />
-                            <CommentEnrollButton type='button'>답글 등록</CommentEnrollButton>
+                            <CommentInput
+                                id='reply'
+                                placeholder='답글을 입력해 주세요.'
+                                value={replyInput}
+                                onChange={handleChangeComment}
+                            />
+                            <CommentEnrollButton
+                                type='button'
+                                onClick={handleSubmitReply(comment[0].id)}
+                            >
+                                답글 등록
+                            </CommentEnrollButton>
                         </>
                     )}
                 </CommentListContainer>

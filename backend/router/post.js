@@ -5,6 +5,7 @@ const {
     getPost,
     addNewPost,
     updatePost,
+    deletePost,
 } = require('../controller/post');
 
 const postRouter = Router();
@@ -56,6 +57,17 @@ postRouter.post('/update/:id', async (req, res) => {
         return res.status(200).json({ msg: '수정성공' });
     } catch (error) {
         return res.status(401).json({ msg: '수정실패' });
+    }
+});
+
+postRouter.post('/delete/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await deletePost(id);
+        return res.status(200).json({ msg: '삭제성공' });
+    } catch (error) {
+        return res.status(401).json({ msg: '삭제실패' });
     }
 });
 

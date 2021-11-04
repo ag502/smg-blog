@@ -123,4 +123,8 @@ const updatePost = async (postId, title, content) => {
     await Detail.update({ content }, { where: { postId } });
 };
 
-module.exports = { getEntirePosts, getMyEntirePosts, getPost, addNewPost, updatePost };
+const deletePost = async (postId) => {
+    await Overview.destroy({ where: { id: postId } });
+};
+
+module.exports = { getEntirePosts, getMyEntirePosts, getPost, addNewPost, updatePost, deletePost };

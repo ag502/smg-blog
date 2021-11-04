@@ -1,14 +1,45 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import { MdEditor } from '@/components/Write';
 
 function Write() {
+    const [title, setTitle] = useState('');
+    const { push } = useHistory();
+    const editorRef = useRef(null);
+
+    const handleChangeTitle = (e) => {
+        const { target } = e;
+        setTitle(target.value);
+    };
+
+    const handleClickSubmit = async () => {
+        const curEditor = editorRef.current.getInstance();
+
+        try {
+            await axios.post('http://localhost:8000/addpost', {
+                title,
+                content: curEditor.getHTML(),
+            });
+            push('/mylist');
+        } catch (error) {
+            alert('등록 실패');
+        }
+    };
+
     return (
         <WriteContainer>
-            <TitleInput placeholder='제목을 입력해 주세요' />
-            <MdEditor />
-            <SubmitButton type='button'>업로드</SubmitButton>
+            <TitleInput
+                placeholder='제목을 입력해 주세요'
+                value={title}
+                onChange={handleChangeTitle}
+            />
+            <MdEditor ref={editorRef} />
+            <SubmitButton type='button' onClick={handleClickSubmit}>
+                업로드
+            </SubmitButton>
         </WriteContainer>
     );
 }

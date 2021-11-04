@@ -18,5 +18,6 @@ module.exports = {
         'import/extensions': 'off',
         'import/prefer-default-export': 'off',
         'no-alert': 'off',
+        'react-hooks/exhaustive-deps': 'off',
     },
 };

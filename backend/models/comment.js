@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.INTEGER,
         },
+        userId: {
+            allowNull: false,
+            type: DataTypes.INTEGER,
+        },
         level: {
             allowNull: true,
             type: DataTypes.INTEGER,
@@ -16,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         order: {
             allowNull: false,
             type: DataTypes.INTEGER,
+        },
+        content: {
+            allowNull: false,
+            type: DataTypes.STRING(100),
         },
         group: {
             allowNull: true,

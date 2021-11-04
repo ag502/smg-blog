@@ -16,6 +16,9 @@ const Comment = require('./comment')(sequelize, Sequelize);
 User.hasMany(Overview, { foreignKey: 'userId', sourceKey: 'id' });
 Overview.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
 
+User.hasMany(Comment, { foreignKey: 'userId', sourceKey: 'id' });
+Comment.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
+
 Detail.belongsTo(Overview, { foreignKey: 'postId', targetKey: 'id', onDelete: 'cascade' });
 Overview.hasOne(Detail, { foreignKey: 'postId', targetKey: 'id' });
 

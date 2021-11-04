@@ -17,5 +17,7 @@ module.exports = {
         'import/no-unresolved': 'off',
         'import/extensions': 'off',
         'import/prefer-default-export': 'off',
+        'no-alert': 'off',
+        'react-hooks/exhaustive-deps': 'off',
     },
 };

@@ -11,6 +11,7 @@ const port = 8000;
 sequelize.sync();
 
 app.use(cors());
+app.use(express.json());
 
 app.use('/', post);
 

@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         title: {
             allowNull: false,
-            type: DataTypes.STRING(30),
+            type: DataTypes.STRING(200),
         },
-        overView: {
+        overview: {
             allowNull: false,
             type: DataTypes.STRING(150),
         },

@@ -1,5 +1,11 @@
 const Router = require('express');
-const { getEntirePosts, getMyEntirePosts, getPost, addNewPost } = require('../controller/post');
+const {
+    getEntirePosts,
+    getMyEntirePosts,
+    getPost,
+    addNewPost,
+    updatePost,
+} = require('../controller/post');
 
 const postRouter = Router();
 
@@ -39,6 +45,17 @@ postRouter.post('/addpost', async (req, res) => {
         return res.status(200).json({ msg: '작성성공' });
     } catch (error) {
         return res.status(401).json({ msg: '작성실패' });
+    }
+});
+
+postRouter.post('/update/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    try {
+        await updatePost(id, title, content);
+        return res.status(200).json({ msg: '수정성공' });
+    } catch (error) {
+        return res.status(401).json({ msg: '수정실패' });
     }
 });
 

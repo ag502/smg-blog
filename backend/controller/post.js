@@ -3,6 +3,20 @@ const { sequelize, Sequelize } = require('../models');
 
 const { overview: Overview, user: User, detail: Detail, comment: Comment } = sequelize.models;
 
+const markDownParserOption = {
+    preserveNewlines: false,
+    selectors: [
+        { selector: 'a', options: { ignoreHref: true } },
+        { selector: 'img', format: 'skip' },
+        { selector: 'p', options: { leadingLineBreaks: 1, trailingLineBreaks: 1 } },
+        { selector: 'pre', options: { leadingLineBreaks: 1, trailingLineBreaks: 1 } },
+        ...['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map((headTag) => ({
+            selector: headTag,
+            options: { uppercase: false },
+        })),
+    ],
+};
+
 const getEntirePosts = async () => {
     const result = await Overview.findAll({
         include: [{ model: User, attributes: [] }],
@@ -88,19 +102,7 @@ const getPost = async (postId) => {
 };
 
 const addNewPost = async (title, content) => {
-    const overview = convert(content, {
-        preserveNewlines: false,
-        selectors: [
-            { selector: 'a', options: { ignoreHref: true } },
-            { selector: 'img', format: 'skip' },
-            { selector: 'p', options: { leadingLineBreaks: 1, trailingLineBreaks: 1 } },
-            { selector: 'pre', options: { leadingLineBreaks: 1, trailingLineBreaks: 1 } },
-            ...['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map((headTag) => ({
-                selector: headTag,
-                options: { uppercase: false },
-            })),
-        ],
-    }).slice(0, 150);
+    const overview = convert(content, markDownParserOption).slice(0, 150);
 
     const insertOverview = await Overview.create({
         userId: 1,
@@ -114,4 +116,11 @@ const addNewPost = async (title, content) => {
     });
 };
 
-module.exports = { getEntirePosts, getMyEntirePosts, getPost, addNewPost };
+const updatePost = async (postId, title, content) => {
+    const overview = convert(content, markDownParserOption).slice(0, 150);
+
+    await Overview.update({ title, overview }, { where: { id: postId } });
+    await Detail.update({ content }, { where: { postId } });
+};
+
+module.exports = { getEntirePosts, getMyEntirePosts, getPost, addNewPost, updatePost };

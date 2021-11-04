@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { AuthContext } from '@/hooks/context';
 
-function PostHeader({ title, info }) {
+function PostHeader({ title, info, postId }) {
     const userInfo = useContext(AuthContext);
+    const { push } = useHistory();
     const { author, time } = info;
+
+    const handleClickModifyBtn = () => {
+        push(`/write/${postId}`);
+    };
+
     return (
         <PostHeaderContainer>
             <PostTitle>{title}</PostTitle>
@@ -16,7 +23,9 @@ function PostHeader({ title, info }) {
                 </PostInfo>
                 {userInfo === author && (
                     <PostAction>
-                        <button type='button'>수정</button>
+                        <button type='button' onClick={handleClickModifyBtn}>
+                            수정
+                        </button>
                         <button type='button'>삭제</button>
                     </PostAction>
                 )}

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -7,8 +7,25 @@ import { MdEditor } from '@/components/Write';
 
 function Write() {
     const [title, setTitle] = useState('');
+    const { id } = useParams();
     const { push } = useHistory();
     const editorRef = useRef(null);
+
+    useEffect(() => {
+        const getPost = async () => {
+            try {
+                const result = await axios.get(`http://localhost:8000/post/${id}`);
+                setTitle(result.data?.title);
+                editorRef.current.getInstance().setHTML(result.data.content);
+            } catch (error) {
+                alert('조회실패');
+            }
+        };
+
+        if (id) {
+            getPost();
+        }
+    }, []);
 
     const handleChangeTitle = (e) => {
         const { target } = e;
@@ -19,7 +36,7 @@ function Write() {
         const curEditor = editorRef.current.getInstance();
 
         try {
-            await axios.post('http://localhost:8000/addpost', {
+            await axios.post(`http://localhost:8000/${id ? `update/${id}` : 'addpost'}`, {
                 title,
                 content: curEditor.getHTML(),
             });

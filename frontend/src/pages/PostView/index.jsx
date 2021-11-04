@@ -28,6 +28,7 @@ function PostView() {
                     <PostHeader
                         title={post.title}
                         info={{ time: post.createdAt, author: post.userName }}
+                        postId={id}
                     />
                     <PostBody content={post.content} />
                     <PostFooter comments={post.comments} />

@@ -23,6 +23,7 @@ function App() {
                     <Route exact path='/mylist' component={MyPost} />
                     <Route exact path='/post/:id' component={PostView} />
                     <Route exact path='/write' component={Write} />
+                    <Route exact path='/write/:id' component={Write} />
                 </Switch>
             </Router>
         </AuthContext.Provider>

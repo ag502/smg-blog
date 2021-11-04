@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { commentStyle } from '@/static/style/commonCss';
 
 function Comment({ content, level }) {
     return (
-        <FirstLevelCommentContainer level={level}>
+        <CommentContainer level={level}>
             <div>{content}</div>
             <CommentController>
                 <AuthorInfo>
@@ -13,7 +13,7 @@ function Comment({ content, level }) {
                     <span>2021-10-27</span>
                 </AuthorInfo>
             </CommentController>
-        </FirstLevelCommentContainer>
+        </CommentContainer>
     );
 }
 
@@ -29,9 +29,10 @@ function PostComments({ comment }) {
     );
 }
 
-const FirstLevelCommentContainer = styled.li`
+const CommentContainer = styled.li`
     ${commentStyle}
-    padding-left: ${(props) => props.level === 2 && '20px'}
+    padding-left: ${(props) => props.level === 2 && '35px'};
+    background-color: ${(props) => (props.level === 2 ? '#FAFAFA' : 'inherit')};
 `;
 
 const CommentController = styled.div`

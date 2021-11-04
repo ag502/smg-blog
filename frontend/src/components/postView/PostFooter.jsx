@@ -75,30 +75,32 @@ function PostFooter({ postId, comments, getPost }) {
                     댓글 등록
                 </CommentEnrollButton>
             </CommentEnroll>
-            {comments.map((comment, idx) => (
-                <CommentListContainer key={idx}>
-                    <PostComments comment={comment} />
-                    <ReplyButton type='button' onClick={handleClickReplyBtn(idx)}>
-                        {curActiveTextArea === idx ? '숨기기' : '답글 등록'}
-                    </ReplyButton>
-                    {curActiveTextArea === idx && (
-                        <>
-                            <CommentInput
-                                id='reply'
-                                placeholder='답글을 입력해 주세요.'
-                                value={replyInput}
-                                onChange={handleChangeComment}
-                            />
-                            <CommentEnrollButton
-                                type='button'
-                                onClick={handleSubmitReply(comment[0].id)}
-                            >
-                                답글 등록
-                            </CommentEnrollButton>
-                        </>
-                    )}
-                </CommentListContainer>
-            ))}
+            <CommentsContainer>
+                {comments.map((comment, idx) => (
+                    <CommentListContainer key={idx}>
+                        <PostComments comment={comment} />
+                        <ReplyButton type='button' onClick={handleClickReplyBtn(idx)}>
+                            {curActiveTextArea === idx ? '숨기기' : '답글 등록'}
+                        </ReplyButton>
+                        {curActiveTextArea === idx && (
+                            <>
+                                <CommentInput
+                                    id='reply'
+                                    placeholder='답글을 입력해 주세요.'
+                                    value={replyInput}
+                                    onChange={handleChangeComment}
+                                />
+                                <CommentEnrollButton
+                                    type='button'
+                                    onClick={handleSubmitReply(comment[0].id)}
+                                >
+                                    답글 등록
+                                </CommentEnrollButton>
+                            </>
+                        )}
+                    </CommentListContainer>
+                ))}
+            </CommentsContainer>
         </PostCommentContainer>
     );
 }
@@ -130,7 +132,13 @@ const CommentEnrollButton = styled.button`
     color: #ffffff;
 `;
 
-const CommentListContainer = styled.div``;
+const CommentsContainer = styled.div`
+    margin-top: 30px;
+`;
+
+const CommentListContainer = styled.div`
+    border-bottom: 1px solid #e9ecef;
+`;
 
 const ReplyButton = styled.button`
     color: #f55f24;
